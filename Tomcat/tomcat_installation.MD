@@ -1,6 +1,5 @@
 # Tomcat installation on EC2 instance
-- Follow this video lecture in Valaxy Technologies **[YouTube Channel](https://youtu.be/68WNroQBUts)**  
-- Complete DevOps Project course on [Udemy](https://www.udemy.com/course/valaxy-devops/?referralCode=8147A5CF4C8C7D9E253F)  
+To install java 11 on your EC2 instance follow the slide from the class.
 ### Pre-requisites
 1. EC2 instance with Java 11
 ### Install Apache Tomcat
@@ -9,44 +8,42 @@
    ```sh 
    # Create tomcat directory
    cd /opt
-   wget http://mirrors.fibergrid.in/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+   mkdir tomcat
+   cd tomcat
+   wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.78/bin/apache-tomcat-8.5.78.tar.gz
    tar -xvzf /opt/apache-tomcat-<version>.tar.gz
    ```
 1. give executing permissions to startup.sh and shutdown.sh which are under bin. 
    ```sh
-   chmod +x /opt/apache-tomcat-<version>/bin/startup.sh 
-   chmod +x /opt/apache-tomcat-<version>/bin/shutdown.sh
+   chmod +x /opt/tomcat/apache-tomcat-<version>/bin/startup.sh 
+   chmod +x /opt/tomcat/apache-tomcat-<version>/bin/shutdown.sh
    ```
    > Note: you may get below error while starting tomcat incase if you dont install Java   
    `Neither the JAVA_HOME nor the JRE_HOME environment variable is defined At least one of these environment variable is needed to run this program`
 1. create link files for tomcat startup.sh and shutdown.sh 
    ```sh
-   ln -s /opt/apache-tomcat-<version>/bin/startup.sh /usr/local/bin/tomcatup
-   ln -s /opt/apache-tomcat-<version>/bin/shutdown.sh /usr/local/bin/tomcatdown
+   ln -s /opt/tomcat/apache-tomcat-<version>/bin/startup.sh /usr/local/bin/tomcatup
+   ln -s /opt/tomcat/apache-tomcat-<version>/bin/shutdown.sh /usr/local/bin/tomcatdown
    tomcatup
    ```
   #### Check point :
 access tomcat application from browser on port 8080  
  - http://<Public_IP>:8080
 
-  Using unique ports for each application is a best practice in an environment. But tomcat and Jenkins runs on ports number 8080. Hence lets change tomcat port number to 8090. Change port number in conf/server.xml file under tomcat home
-   ```sh
- cd /opt/apache-tomcat-<version>/conf
-# update port number in the "connecter port" field in server.xml
-# restart tomcat after configuration update
-tomcatdown
-tomcatup
-```
 #### Check point :
-Access tomcat application from browser on port 8090  
- - http://<Public_IP>:8090
+Access tomcat application from browser on port 8080  
+ - http://<Public_IP>:8080
 
-1. now application is accessible on port 8090. but tomcat application doesnt allow to login from browser. changing a default parameter in context.xml does address this issue
+1. now application is accessible on port 8080. But tomcat application doesnt allow to login from browser. changing a default parameter in context.xml does address this issue
    ```sh
-   #search for context.xml
-   find / -name context.xml
+   #search for the file "context.xml" with the command below
+   find /opt -name context.xml
    ```
-1. above command gives 3 context.xml files. comment (<!-- & -->) `Value ClassName` field on files which are under webapp directory. 
+1. above command gives 4 context.xml files. 
+2. vim into the files and comment `< Value ClassName...../>` field on files which are under the following directory directory. 
+3. ~/host-manager/........
+4. ~/manager/........
+5. To comment out use <!-- value ClassName....... -->
 After that restart tomcat services to effect these changes. 
 At the time of writing this lecture below 2 files are updated. 
    ```sh 
@@ -58,7 +55,9 @@ At the time of writing this lecture below 2 files are updated.
    tomcatup
    ```
 1. Update users information in the tomcat-users.xml file
-goto tomcat home directory and Add below users to conf/tomcat-users.xml file
+2. Go into your tomcat home directory
+3. cd /opt/tomcat/apache-tomcat-<version>
+And Add below users to conf/tomcat-users.xml file
    ```sh
 	<role rolename="manager-gui"/>
 	<role rolename="manager-script"/>
