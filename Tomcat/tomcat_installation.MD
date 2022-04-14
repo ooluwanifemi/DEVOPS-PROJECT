@@ -2,8 +2,13 @@
 To install java 11 on your EC2 instance follow the slide from the class.
 ### Pre-requisites
 1. EC2 instance with Java 11
+2. Hence Launch an EC2 instance
+3. Leave all ports open (All traffic)
+4. Update the server
+5. install java-11
+6. install java-jdk
 ### Install Apache Tomcat
-1. Download tomcat packages from  https://tomcat.apache.org/download-80.cgi onto /opt on EC2 instance
+1. Ypu can download tomcat packages from  https://tomcat.apache.org/download-80.cgi onto /opt on EC2 instance
    > Note: Make sure you change `<version>` with the tomcat version which you download. 
    ```sh 
    # Create tomcat directory
@@ -13,7 +18,11 @@ To install java 11 on your EC2 instance follow the slide from the class.
    wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.78/bin/apache-tomcat-8.5.78.tar.gz
    tar -xvzf /opt/apache-tomcat-<version>.tar.gz
    ```
-1. give executing permissions to startup.sh and shutdown.sh which are under bin. 
+1. list all the files oin the tomcat folder
+2. Remove the ~.tar.gz file
+3. Go into into the apach-tomcat..... folder
+4. Go into the bin folder
+5. give executing permissions to startup.sh and shutdown.sh which are under bin. 
    ```sh
    chmod +x /opt/tomcat/apache-tomcat-<version>/bin/startup.sh 
    chmod +x /opt/tomcat/apache-tomcat-<version>/bin/shutdown.sh
