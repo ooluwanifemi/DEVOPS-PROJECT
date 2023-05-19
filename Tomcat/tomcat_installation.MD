@@ -49,25 +49,25 @@ To install Java 11 on your EC2 instance, follow the slides from the class.
     - Download the Tomcat package using wget. Replace `<version>` with the Tomcat version you want to install:
 
         ```
-        sudo wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.56/bin/apache-tomcat-9.0.56.tar.gz
+        sudo wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz
         ```
 
     - Extract the downloaded tar.gz file:
 
         ```
-        sudo tar -xvzf apache-tomcat-9.0.56.tar.gz
+        sudo tar -xvzf apache-tomcat-9.0.75.tar.gz
         ```
 
     - Remove the .tar.gz file:
 
         ```
-        sudo rm apache-tomcat-9.0.56.tar.gz
+        sudo rm apache-tomcat-9.0.75.tar.gz
         ```
 
-    - Navigate into the apache-tomcat-9.0.56 folder:
+    - Navigate into the apache-tomcat-9.0.75 folder:
 
         ```
-        cd apache-tomcat-9.0.56
+        cd apache-tomcat-9.0.75
         ```
 
     - Go into the bin folder:
@@ -88,8 +88,8 @@ To install Java 11 on your EC2 instance, follow the slides from the class.
     - Create symbolic links for startup.sh and shutdown.sh to make them easily accessible:
 
         ```
-        sudo ln -s /opt/tomcat/apache-tomcat-9.0.56/bin/startup.sh /usr/local/bin/tomcatup
-        sudo ln -s /opt/tomcat/apache-tomcat-9.0.56/bin/shutdown.sh /usr/local/bin/tomcatdown
+        sudo ln -s /opt/tomcat/apache-tomcat-9.0.75/bin/startup.sh /usr/local/bin/tomcatup
+        sudo ln -s /opt/tomcat/apache-tomcat-9.0.75/bin/shutdown.sh /usr/local/bin/tomcatdown
         ```
 
     - Start Tomcat by running the following command:
@@ -109,8 +109,8 @@ To install Java 11 on your EC2 instance, follow the slides from the class.
     - Open each context.xml file found and comment out the `<Value ClassName.../>` field in the following directories:
 
         ```
-        ~/apache-tomcat-9.0.56/webapps/host-manager/META-INF/context.xml
-        ~/apache-tomcat-9.0.56/webapps/manager/META-INF/context.xml
+        ~/apache-tomcat-9.0.75/webapps/host-manager/META-INF/context.xml
+        ~/apache-tomcat-9.0.75/webapps/manager/META-INF/context.xml
         ```
 
     - Restart Tomcat services to apply the changes:
@@ -125,7 +125,7 @@ To install Java 11 on your EC2 instance, follow the slides from the class.
     - Go to the Tomcat home directory:
 
         ```
-        cd /opt/tomcat/apache-tomcat-9.0.56
+        cd /opt/tomcat/apache-tomcat-9.0.75
         ```
 
     - Edit the conf/tomcat-users.xml file and add the following users:
